@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
-import AboutPage from "./about/AboutPage";
+import SearchPage from "./about/SearchPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import ChartsPage from "./chart/ChartsPage";
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/about" component={AboutPage} />
+        <Route path="/about" component={SearchPage} />
         <Route path="/chart" component={ChartsPage} />
         <Route component={PageNotFound} />
       </Switch>
