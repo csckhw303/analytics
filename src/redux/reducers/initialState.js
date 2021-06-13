@@ -1,4 +1,4 @@
 export default {
-  course: [],
+  announcedInfos: [],
   authors: [],
 };

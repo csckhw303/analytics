@@ -4,7 +4,7 @@ import HomePage from "./home/HomePage";
 import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
-import ChartPage from "./chart/ChartPage";
+import ChartsPage from "./chart/ChartsPage";
 function App() {
   return (
     <div className="container-fluid">
@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/chart" component={ChartPage} />
+        <Route path="/chart" component={ChartsPage} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

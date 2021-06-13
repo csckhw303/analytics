@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import courses from "./courseReducer";
+import announcedInfos from "./announcedInfoReducer";
 import authors from "./authorReducer";
 
 const rootReducer = combineReducers({
-  courses,
+  announcedInfos,
   authors,
 });
 
