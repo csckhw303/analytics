@@ -30,9 +30,6 @@ class CoursesPage extends React.Component {
               <PieChart data={this.props.announcedInfos}></PieChart>
             </td>
             <td>
-              <PieChart data={this.props.announcedInfos}></PieChart>
-            </td>
-            <td>
               <ColChart data={this.props.twoGbandsInfos}></ColChart>
             </td>
           </tr>
