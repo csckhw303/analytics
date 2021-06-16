@@ -8,9 +8,8 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import PieChart from "./PieChart";
 import ColChart from "./ColChart";
-import BubChart from "./BubChart";
 
-class CoursesPage extends React.Component {
+class ChartsPage extends React.Component {
   componentDidMount() {
     if (this.props.announcedInfos.length === 0) {
       this.props.actions.loadAnnouncedInfos().catch((error) => {
@@ -60,7 +59,7 @@ class CoursesPage extends React.Component {
   }
 }
 
-CoursesPage.propTypes = {
+ChartsPage.propTypes = {
   announcedInfos: PropTypes.array.isRequired,
   twoGbandsInfos: PropTypes.array.isRequired,
   SIMInfos: PropTypes.array.isRequired,
@@ -95,4 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ChartsPage);

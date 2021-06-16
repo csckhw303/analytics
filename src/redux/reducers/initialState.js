@@ -2,5 +2,6 @@ export default {
   announcedInfos: [],
   authors: [],
   twoGbandsInfos: [],
-  SIMInfos: []
+  SIMInfos: [],
+  wlanInfos: []
 };
