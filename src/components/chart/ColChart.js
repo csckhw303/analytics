@@ -11,7 +11,7 @@ const ColChart = (props) => {
       type: "column",
     },
     title: {
-      text: "2G Band total count",
+      text: props.title,
     },
     accessibility: {
       announceNewData: {
@@ -23,7 +23,7 @@ const ColChart = (props) => {
     },
     yAxis: {
       title: {
-        text: "2G Band total count",
+        text: props.yTitle,
       },
     },
     legend: {

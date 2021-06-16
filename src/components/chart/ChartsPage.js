@@ -37,14 +37,21 @@ class CoursesPage extends React.Component {
               <PieChart data={this.props.announcedInfos}></PieChart>
             </td>
             <td>
-              <ColChart data={this.props.twoGbandsInfos}></ColChart>
-            </td>
-            <td>
-              <BubChart data={this.props.SIMInfos}></BubChart>
+              <ColChart
+                data={this.props.twoGbandsInfos}
+                title="2G Band total count"
+                yTitle="2G Band total count"
+              ></ColChart>
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>
+              <ColChart
+                data={this.props.SIMInfos}
+                title="SIM total count"
+                yTitle="SIM total count"
+              ></ColChart>
+            </td>
             <td></td>
           </tr>
         </tbody>
@@ -83,10 +90,7 @@ function mapDispatchToProps(dispatch) {
         dispatch
       ),
 
-      loadSIMInfos: bindActionCreators(
-        SIMInfoActions.loadSIMInfo,
-        dispatch
-      ),
+      loadSIMInfos: bindActionCreators(SIMInfoActions.loadSIMInfo, dispatch),
     },
   };
 }
