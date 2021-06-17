@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import * as wlanInfoActions from "../../redux/actions/wlanInfoActions.js";
-import * as searchActions from "../../redux/actions/searchActions.js";
+import * as searchActions from "../../redux/actions/searchActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import SearchForm from "./SearchForm";
@@ -17,11 +16,11 @@ const SearchPage = (props) => {
 
   //it is simailar as componentDidMount. syntax is little different
   useEffect(() => {
-    if (props.wlanInfos.length === 0) {
-      props.actions.loadwlanInfos().catch((error) => {
-        alert("Loading loadwlanInfos failed " + error);
-      });
-    }
+    //if (props.wlanInfos.length === 0) {
+    //props.actions.loadwlanInfos().catch((error) => {
+    //  alert("Loading loadwlanInfos failed " + error);
+    //});
+    //}
   }, []);
 
   //collect criteria from form component
@@ -50,7 +49,6 @@ const SearchPage = (props) => {
 };
 
 SearchPage.propTypes = {
-  wlanInfos: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
@@ -63,7 +61,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadwlanInfos: bindActionCreators(wlanInfoActions.loadwlanInfo, dispatch),
       search: bindActionCreators(searchActions.search, dispatch),
     },
   };
