@@ -2,36 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 
-//import SelectInput from "../common/SelectInput";
-
-const SearchForm = ({ onSave, onChange, saving = false, errors = {} }) => {
+const SearchForm = ({ onSave, onChange }) => {
   return (
     <form onSubmit={onSave}>
       <table>
         <tbody>
           <tr>
             <td>
-              <TextInput
-                name="title"
-                label="Title"
-                onChange={onChange}
-                error={errors.title}
-              />
+              <TextInput name="title" label="Title" onChange={onChange} />
             </td>
             <td>
-              <TextInput
-                name="category"
-                label="Category"
-                onChange={onChange}
-                error={errors.category}
-              />
+              <TextInput name="category" label="Category" onChange={onChange} />
             </td>
             <td>
               <TextInput
                 name="category2"
                 label="Category2"
                 onChange={onChange}
-                error={errors.category}
               />
             </td>
             <td>
@@ -39,14 +26,13 @@ const SearchForm = ({ onSave, onChange, saving = false, errors = {} }) => {
                 name="category3"
                 label="Category3"
                 onChange={onChange}
-                error={errors.category}
               />
             </td>
           </tr>
         </tbody>
       </table>
 
-      <button type="submit" disabled={saving} className="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Search
       </button>
     </form>
@@ -54,10 +40,8 @@ const SearchForm = ({ onSave, onChange, saving = false, errors = {} }) => {
 };
 
 SearchForm.propTypes = {
-  errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
 };
 
 export default SearchForm;

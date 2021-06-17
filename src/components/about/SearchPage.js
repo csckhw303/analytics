@@ -4,6 +4,7 @@ import * as searchActions from "../../redux/actions/searchActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import SearchForm from "./SearchForm";
+import SearchResultShow from "./SearchResultShow";
 
 //I've changed this component from class to function
 //There are two types of components exist. One is class component and the other is functional component
@@ -33,28 +34,31 @@ const SearchPage = (props) => {
       //  if no same then it will be merged into the object, then set with new object
     }));
   }
-  function onSave() {
-    alert(criteria.title + " " + criteria.category); //remove after test
+  function onSave(event) {
+    event.preventDefault();
     props.actions.search(criteria).catch((error) => {
-      alert("Loading loadwlanInfos failed " + error);
+      alert("Search failed " + error);
     });
     //ToDO: Create API function for this
     //Create component to show result
   }
 
   return (
-    <SearchForm onSave={onSave} onChange={onTextBoxChange}></SearchForm>
-    // here should be the result display component
+    <div>
+      <SearchForm onSave={onSave} onChange={onTextBoxChange}></SearchForm>
+      <SearchResultShow result={props.searchResult}></SearchResultShow>
+    </div>
   );
 };
 
 SearchPage.propTypes = {
   actions: PropTypes.object.isRequired,
+  searchResult: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
-    wlanInfos: state.wlanInfos,
+    searchResult: state.searchResult,
   };
 }
 

@@ -1,5 +1,6 @@
 export default {
   announcedInfos: [],
   authors: [],
-  twoGbandsInfos: []
+  twoGbandsInfos: [],
+  searchResult: [],
 };
