@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as searchActions from "../../redux/actions/searchActions";
+import * as wlanInfoActions from "../../redux/actions/wlanInfoActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import SearchForm from "./SearchForm";
@@ -13,15 +14,19 @@ import SearchResultShow from "./SearchResultShow";
 //But useEffect or useState can not be used.
 const SearchPage = (props) => {
   //I am using react state here not redux state for collecting the criteria value for the search
-  const [criteria, setCriteria] = useState({ category: "", title: "" }); //this will start react local variable with convenient "setCategory" as update function
+  const [criteria, setCriteria] = useState({
+    category: "",
+    title: "",
+    wlen: [],
+  }); //this will start react local variable with convenient "setCategory" as update function
 
   //it is simailar as componentDidMount. syntax is little different
   useEffect(() => {
-    //if (props.wlanInfos.length === 0) {
-    //props.actions.loadwlanInfos().catch((error) => {
-    //  alert("Loading loadwlanInfos failed " + error);
-    //});
-    //}
+    if (props.wlanInfos.length === 0) {
+      props.actions.loadwlanInfos().catch((error) => {
+        alert("Loading loadwlanInfos failed " + error);
+      });
+    }
   }, []);
 
   //collect criteria from form component
@@ -42,10 +47,30 @@ const SearchPage = (props) => {
     //ToDO: Create API function for this
     //Create component to show result
   }
+  function onTypeaheadChange(event) {
+    const { name, value } = event; //destructure event.target and only use two attribute
 
+    let result = value
+      .map(function (obj) {
+        return obj.ids;
+      })
+      .join(",");
+
+    setCriteria((criteriaObject) => ({
+      ...criteriaObject, //... means  spread out the attribute of the class title: dd , category: aaa
+      [name]: result, //  in this line name can be title or category depending on which input box user is typeing
+      //  if there is the same attribute on left side (...criteriaObject), it would be replaced.
+      //  if no same then it will be merged into the object, then set with new object
+    }));
+  }
   return (
     <div>
-      <SearchForm onSave={onSave} onChange={onTextBoxChange}></SearchForm>
+      <SearchForm
+        onSave={onSave}
+        onChange={onTextBoxChange}
+        wLanOptions={props.wlanInfos}
+        onTypeaheadChange={onTypeaheadChange}
+      ></SearchForm>
       <SearchResultShow result={props.searchResult}></SearchResultShow>
     </div>
   );
@@ -54,11 +79,13 @@ const SearchPage = (props) => {
 SearchPage.propTypes = {
   actions: PropTypes.object.isRequired,
   searchResult: PropTypes.array,
+  wlanInfos: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
     searchResult: state.searchResult,
+    wlanInfos: state.wlanInfos,
   };
 }
 
@@ -66,6 +93,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       search: bindActionCreators(searchActions.search, dispatch),
+      loadwlanInfos: bindActionCreators(wlanInfoActions.loadwlanInfo, dispatch),
     },
   };
 }

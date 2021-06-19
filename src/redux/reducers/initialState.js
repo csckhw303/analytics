@@ -3,4 +3,5 @@ export default {
   authors: [],
   twoGbandsInfos: [],
   searchResult: [],
+  wlanInfos: [],
 };
