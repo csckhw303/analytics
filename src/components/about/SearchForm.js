@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
+//https://github.com/ericgio/react-bootstrap-typeahead
 
 const SearchForm = ({ onSave, onChange, wLanOptions, onTypeaheadChange }) => {
   const [multiSelections, setMultiSelections] = useState([]);

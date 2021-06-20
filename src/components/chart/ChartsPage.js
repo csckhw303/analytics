@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import * as announcedInfoActions from "../../redux/actions/announcedInfoActions";
 import * as authorActions from "../../redux/actions/authorActions";
 import * as twoGbandsInfoActions from "../../redux/actions/twoGbandsInfoActions";
+import * as SIMInfoActions from "../../redux/actions/SIMInfoActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import PieChart from "./PieChart";
 import ColChart from "./ColChart";
-
+import RollPopChart from "./RollpopChart";
 class CoursesPage extends React.Component {
   componentDidMount() {
     if (this.props.announcedInfos.length === 0) {
@@ -18,6 +19,11 @@ class CoursesPage extends React.Component {
     if (this.props.twoGbandsInfos.length === 0) {
       this.props.actions.loadtwoGbandsInfos().catch((error) => {
         alert("Loading loadtwoGbandsInfos failed " + error);
+      });
+    }
+    if (this.props.SIMInfos.length === 0) {
+      this.props.actions.loadSIMInfos().catch((error) => {
+        alert("Loading loadSIMInfos failed " + error);
       });
     }
   }
@@ -34,7 +40,13 @@ class CoursesPage extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>
+              <RollPopChart
+                data={this.props.SIMInfos}
+                title="SIM total count"
+                yTitle="SIM total count"
+              ></RollPopChart>
+            </td>
             <td></td>
           </tr>
         </tbody>
@@ -46,6 +58,7 @@ class CoursesPage extends React.Component {
 CoursesPage.propTypes = {
   announcedInfos: PropTypes.array.isRequired,
   twoGbandsInfos: PropTypes.array.isRequired,
+  SIMInfos: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
@@ -53,6 +66,7 @@ function mapStateToProps(state) {
   return {
     announcedInfos: state.announcedInfos,
     twoGbandsInfos: state.twoGbandsInfos,
+    SIMInfos: state.SIMInfos,
   };
 }
 
@@ -69,6 +83,7 @@ function mapDispatchToProps(dispatch) {
         twoGbandsInfoActions.loadtwoGbandsInfo,
         dispatch
       ),
+      loadSIMInfos: bindActionCreators(SIMInfoActions.loadSIMInfo, dispatch),
     },
   };
 }

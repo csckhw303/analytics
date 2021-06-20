@@ -4,4 +4,5 @@ export default {
   twoGbandsInfos: [],
   searchResult: [],
   wlanInfos: [],
+  SIMInfos: [],
 };
