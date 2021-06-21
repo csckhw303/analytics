@@ -5,12 +5,17 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 //https://github.com/ericgio/react-bootstrap-typeahead
 
-const SearchForm = ({ onSave, onChange, wLanOptions, onTypeaheadChange }) => {
+const SearchForm = ({ onSave, onChange, wLanOptions, chipsetOptions, onTypeaheadChange }) => {
   const [multiSelections, setMultiSelections] = useState([]);
+  const [multiSelectionsForChipset, setMultiSelectionsForChipset] = useState([]);
   var wlanoptions = wLanOptions;
-  var chipsetoptions = [];
+  var chipsetoptions = chipsetOptions;
+  function handleChangeForChipset(event) {
+    onTypeaheadChange({ name: "chipset", value: event });
+    setMultiSelectionsForChipset(event);
+  }
   function handleChange(event) {
-    onTypeaheadChange({ name: "wlen", value: event });
+    onTypeaheadChange({ name: "wlan", value: event });
     setMultiSelections(event);
   }
   return (
@@ -19,25 +24,27 @@ const SearchForm = ({ onSave, onChange, wLanOptions, onTypeaheadChange }) => {
         <tbody>
           <tr>
             <td>
-              <label>WLEN</label>
+              <label>wlan</label>
               <Typeahead
                 id="wlan_typeahead"
                 labelKey="wlan"
                 multiple
                 onChange={handleChange}
                 options={wlanoptions}
-                placeholder="Choose wlen..."
+                placeholder="Choose wlan..."
                 selected={multiSelections}
               />
             </td>
             <td>
-              <label>WLEN</label>
+              <label>chipset</label>
               <Typeahead
                 id="chip_set"
-                labelKey="wlen"
+                labelKey="chipset"
                 multiple
+                onChange={handleChangeForChipset}
                 options={chipsetoptions}
-                placeholder="Choose wlen..."
+                placeholder="Choose chipset..."
+                selected={multiSelectionsForChipset}
               ></Typeahead>
             </td>
           </tr>
@@ -61,6 +68,7 @@ SearchForm.propTypes = {
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   wLanOptions: PropTypes.array,
+  chipsetOptions: PropTypes.array,
   onTypeaheadChange: PropTypes.func,
 };
 

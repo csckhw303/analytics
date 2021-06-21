@@ -5,4 +5,5 @@ export default {
   searchResult: [],
   wlanInfos: [],
   SIMInfos: [],
+  chipsetInfos: []
 };

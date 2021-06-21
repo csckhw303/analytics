@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as searchActions from "../../redux/actions/searchActions";
 import * as wlanInfoActions from "../../redux/actions/wlanInfoActions";
+import * as chipsetInfoActions from "../../redux/actions/chipsetInfoActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import SearchForm from "./SearchForm";
@@ -17,7 +18,8 @@ const SearchPage = (props) => {
   const [criteria, setCriteria] = useState({
     category: "",
     title: "",
-    wlen: [],
+    wlan: [],
+    chipset: []
   }); //this will start react local variable with convenient "setCategory" as update function
 
   //it is simailar as componentDidMount. syntax is little different
@@ -25,6 +27,11 @@ const SearchPage = (props) => {
     if (props.wlanInfos.length === 0) {
       props.actions.loadwlanInfos().catch((error) => {
         alert("Loading loadwlanInfos failed " + error);
+      });
+    }
+    if (props.chipsetInfos.length === 0) {
+      props.actions.loadchipsetInfos().catch((error) => {
+        alert("Loading loadchipsetInfos failed " + error);
       });
     }
   }, []);
@@ -69,6 +76,7 @@ const SearchPage = (props) => {
         onSave={onSave}
         onChange={onTextBoxChange}
         wLanOptions={props.wlanInfos}
+        chipsetOptions={props.chipsetInfos}
         onTypeaheadChange={onTypeaheadChange}
       ></SearchForm>
       <SearchResultShow result={props.searchResult}></SearchResultShow>
@@ -80,12 +88,14 @@ SearchPage.propTypes = {
   actions: PropTypes.object.isRequired,
   searchResult: PropTypes.array,
   wlanInfos: PropTypes.array,
+  chipsetInfos: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
     searchResult: state.searchResult,
     wlanInfos: state.wlanInfos,
+    chipsetInfos: state.chipsetInfos,
   };
 }
 
@@ -94,6 +104,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       search: bindActionCreators(searchActions.search, dispatch),
       loadwlanInfos: bindActionCreators(wlanInfoActions.loadwlanInfo, dispatch),
+      loadchipsetInfos: bindActionCreators(chipsetInfoActions.loadchipsetInfo, dispatch),
     },
   };
 }

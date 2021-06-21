@@ -5,6 +5,8 @@ import twoGbandsInfos from "./2GbandsInfoReducer";
 import searchResult from "./searchReducer";
 import wlanInfos from "./wlanInfoReducer";
 import SIMInfos from "./SIMInfoReducer";
+import chipsetInfos from "./chipsetInfoReducer";
+
 const rootReducer = combineReducers({
   announcedInfos,
   authors,
@@ -12,6 +14,7 @@ const rootReducer = combineReducers({
   searchResult,
   wlanInfos,
   SIMInfos,
+  chipsetInfos,
 });
 
 export default rootReducer;
