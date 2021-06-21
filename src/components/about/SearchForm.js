@@ -5,9 +5,17 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 //https://github.com/ericgio/react-bootstrap-typeahead
 
-const SearchForm = ({ onSave, onChange, wLanOptions, chipsetOptions, onTypeaheadChange }) => {
+const SearchForm = ({
+  onSave,
+  onChange,
+  wLanOptions,
+  chipsetOptions,
+  onTypeaheadChange,
+}) => {
   const [multiSelections, setMultiSelections] = useState([]);
-  const [multiSelectionsForChipset, setMultiSelectionsForChipset] = useState([]);
+  const [multiSelectionsForChipset, setMultiSelectionsForChipset] = useState(
+    []
+  );
   var wlanoptions = wLanOptions;
   var chipsetoptions = chipsetOptions;
   function handleChangeForChipset(event) {
@@ -36,7 +44,7 @@ const SearchForm = ({ onSave, onChange, wLanOptions, chipsetOptions, onTypeahead
               />
             </td>
             <td>
-              <label>chipset</label>
+              <label>Chipset</label>
               <Typeahead
                 id="chip_set"
                 labelKey="chipset"

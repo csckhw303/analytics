@@ -19,7 +19,7 @@ const SearchPage = (props) => {
     category: "",
     title: "",
     wlan: [],
-    chipset: []
+    chipset: [],
   }); //this will start react local variable with convenient "setCategory" as update function
 
   //it is simailar as componentDidMount. syntax is little different
@@ -104,7 +104,10 @@ function mapDispatchToProps(dispatch) {
     actions: {
       search: bindActionCreators(searchActions.search, dispatch),
       loadwlanInfos: bindActionCreators(wlanInfoActions.loadwlanInfo, dispatch),
-      loadchipsetInfos: bindActionCreators(chipsetInfoActions.loadchipsetInfo, dispatch),
+      loadchipsetInfos: bindActionCreators(
+        chipsetInfoActions.loadchipsetInfo,
+        dispatch
+      ),
     },
   };
 }
