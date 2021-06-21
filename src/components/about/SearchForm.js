@@ -56,12 +56,6 @@ const SearchForm = ({
               ></Typeahead>
             </td>
           </tr>
-          <tr>
-            <td>
-              <TextInput name="category" label="Category" onChange={onChange} />
-            </td>
-            <td></td>
-          </tr>
         </tbody>
       </table>
 
